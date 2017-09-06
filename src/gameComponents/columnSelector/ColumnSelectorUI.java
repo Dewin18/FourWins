@@ -3,12 +3,9 @@ package gameComponents.columnSelector;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
-import main.GamePanel;
 
 public class ColumnSelectorUI
 {
@@ -27,8 +24,6 @@ public class ColumnSelectorUI
     public ColumnSelectorUI()
     {
         selectorButtonPanel = new JPanel();
-        selectorButtonPanel.setPreferredSize(new Dimension(GamePanel.WIDTH-100, 40));
-        selectorButtonPanel.setLayout(new GridLayout(1,  7, 2, 0));
         
         initColumnButtons();
         insertColumnButtonsIntoButtonPanel();
@@ -40,6 +35,7 @@ public class ColumnSelectorUI
         createColumnButtons();
         initButtonArray();
         setButtonIcon("▾");
+        setButtonSize();
     }
     
     private void initButtonArray()
@@ -65,6 +61,8 @@ public class ColumnSelectorUI
         column_4 = new JButton();
         column_5 = new JButton();
         column_6 = new JButton();
+        
+        column_0.setPreferredSize(new Dimension(72,40));
     }
 
     private void insertColumnButtonsIntoButtonPanel()
@@ -80,6 +78,14 @@ public class ColumnSelectorUI
         for(int i=0; i < buttons.length; i++)
         {
             buttons[i].setText(icon);
+        }
+    }
+    
+    private void setButtonSize()
+    {
+        for (JButton columnButton : buttons)
+        {
+            columnButton.setPreferredSize(new Dimension(72, 40));
         }
     }
     

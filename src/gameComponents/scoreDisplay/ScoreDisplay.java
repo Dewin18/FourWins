@@ -10,13 +10,12 @@ import javax.swing.JPanel;
 
 import main.GamePanel;
 
-public class ScoreDisplay extends JPanel
+public class ScoreDisplay 
 {
-    private static final long serialVersionUID = 1L;
-
     private final int NO_OF_BLANKS = 20;
     private final int DISPLAY_FONT_SIZE = 25;
 
+    private JPanel southPanel;
     private JPanel displayPanel;
     private JLabel playerOneName;
     private JLabel playerTwoName;
@@ -25,7 +24,7 @@ public class ScoreDisplay extends JPanel
 
     public ScoreDisplay()
     {
-        initScoreDisplay();
+        initSouthDisplay();
         initDisplayPanel();
         initPlayerNames();
         initScore();
@@ -33,19 +32,22 @@ public class ScoreDisplay extends JPanel
         combineNamesAndScore();
     }
 
-    private void initScoreDisplay()
+    private void initSouthDisplay()
     {
-        setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        setPreferredSize(new Dimension(GamePanel.WIDTH, 38));
+        southPanel = new JPanel();
+        
+        southPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        southPanel.setPreferredSize(new Dimension(GamePanel.WIDTH, 38));
     }
 
     private void initDisplayPanel()
     {
+        
         displayPanel = new JPanel();
         displayPanel.setPreferredSize(new Dimension(GamePanel.WIDTH - 22, 36));
         displayPanel.setBackground(Color.BLACK);
 
-        add(displayPanel);
+        southPanel.add(displayPanel);
     }
 
     private void initPlayerNames()
@@ -118,5 +120,9 @@ public class ScoreDisplay extends JPanel
         displayPanel.add(scoreText);
         displayPanel.add(playerTwoName);
     }
-
+    
+    public JPanel getSouthPanel()
+    {
+        return southPanel;
+    }
 }

@@ -8,10 +8,8 @@ import javax.swing.JPanel;
 
 import gameComponents.playField.PlayFieldHandler;
 
-public class ColumnSelector extends JPanel
+public class ColumnSelector 
 {
-    private static final long serialVersionUID = 1L;
-
     private ColumnSelectorUI columnSelectorUI;
     private JButton[] buttons;
     private PlayFieldHandler playFieldHandler;
@@ -22,7 +20,6 @@ public class ColumnSelector extends JPanel
 
         columnSelectorUI = new ColumnSelectorUI();
 
-        add(columnSelectorUI.getSelectorButtonPanel());
         registerColumnButtonListener();
     }
 
@@ -58,5 +55,10 @@ public class ColumnSelector extends JPanel
             if (button.equals(buttons[index])) return index;
         }
         return -1;
+    }
+    
+    public JPanel getColumnSelectorPanel()
+    {
+        return columnSelectorUI.getSelectorButtonPanel();
     }
 }

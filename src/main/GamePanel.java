@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements Runnable
     private long targetTime = 1000 / FPS;
     
     private ColumnSelector columnSelector;
-    private PlayFieldHandler playField;
+    private PlayFieldHandler playFieldHandler;
     private ScoreDisplay scoreDisplay;
 
     //6 * 7 = 42 fields
@@ -33,8 +33,8 @@ public class GamePanel extends JPanel implements Runnable
 
     private void createComponents()
     {
-        playField = new PlayFieldHandler();
-        columnSelector = new ColumnSelector(playField);
+        playFieldHandler = new PlayFieldHandler();
+        columnSelector = new ColumnSelector(playFieldHandler);
         scoreDisplay = new ScoreDisplay();
     }
 
@@ -46,9 +46,9 @@ public class GamePanel extends JPanel implements Runnable
 
     private void adjustComponents()
     {
-        add(columnSelector, BorderLayout.NORTH);
-        add(playField, BorderLayout.CENTER);
-        add(scoreDisplay, BorderLayout.SOUTH);
+        add(columnSelector.getColumnSelectorPanel(), BorderLayout.NORTH);
+        add(playFieldHandler, BorderLayout.CENTER);
+        add(scoreDisplay.getSouthPanel(), BorderLayout.SOUTH);
     }
 
     private void startThread()
@@ -74,7 +74,7 @@ public class GamePanel extends JPanel implements Runnable
         startTime = getCurrentTime();
 
         //playField.update();
-        playField.repaint();
+        playFieldHandler.repaint();
 
         elapsedTime = getCurrentTime() - startTime;
         
