@@ -64,13 +64,31 @@ public class VictoryInspector
     {
         this.playField = playField;
         resetTokenSequence();
+
+        for (int i = 0; i < columns; i++)
+        {
+            for (int j = 0; j < rows - 1; j++)
+            {
+                if (tokensInColumnAreEqual(j, i))
+                {
+                    extendTokenSequence();
+                    if (fourTokensEqualInSequence()) return true;
+                }
+                else
+                {
+                    resetTokenSequence();
+                }
+            }
+            resetTokenSequence();
+        }
         return false;
     }
     
     //TODO
-    private boolean isTokensInColumnAreEqual(int row, int column)
+    private boolean tokensInColumnAreEqual(int row, int column)
     {
-        return false;
+    	return playField[row][column] != 0
+                && playField[row][column] == playField[row + 1][column];
     }
 
     public boolean checkDiagonal(int[][] playField)
