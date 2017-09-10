@@ -14,7 +14,9 @@ public class PlayField
     {
         playField = new int[rows][columns];
         inspector = new VictoryInspector(rows, columns);
+        
         writeOnConsole(playField);
+        System.out.println();
     }
 
     public void placeTokenIfValidColumn(int column)
@@ -30,7 +32,6 @@ public class PlayField
             }
             changePlayer();
         }
-
         System.out.println();
         writeOnConsole(playField);
     }
