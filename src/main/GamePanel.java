@@ -3,6 +3,7 @@ package main;
 import java.awt.*;
 import javax.swing.JPanel;
 
+import gameComponents.ComponentTool;
 import gameComponents.columnSelector.ColumnSelector;
 import gameComponents.playField.PlayFieldHandler;
 import gameComponents.scoreDisplay.ScoreDisplay;
@@ -17,25 +18,14 @@ public class GamePanel extends JPanel implements Runnable
     private boolean isRunning = true;
     private int FPS = 60;
     private long targetTime = 1000 / FPS;
-    
-    private ColumnSelector columnSelector;
-    private PlayFieldHandler playFieldHandler;
-    private ScoreDisplay scoreDisplay;
 
-    //6 * 7 = 42 fields
+    private ComponentTool componentTool = new ComponentTool();
+
     public GamePanel()
     {
-        createComponents();
         initGamePanel();
         adjustComponents();
         startThread();
-    }
-
-    private void createComponents()
-    {
-        playFieldHandler = new PlayFieldHandler();
-        columnSelector = new ColumnSelector(playFieldHandler);
-        scoreDisplay = new ScoreDisplay();
     }
 
     private void initGamePanel()
@@ -46,9 +36,29 @@ public class GamePanel extends JPanel implements Runnable
 
     private void adjustComponents()
     {
-        add(columnSelector.getColumnSelectorPanel(), BorderLayout.NORTH);
-        add(playFieldHandler, BorderLayout.CENTER);
-        add(scoreDisplay.getSouthPanel(), BorderLayout.SOUTH);
+        add(getSelectorPanel(), BorderLayout.NORTH);
+        add(getPlayFieldHandler(), BorderLayout.CENTER);
+        add(getScoreDisplay(), BorderLayout.SOUTH);
+    }
+
+    private JPanel getSelectorPanel()
+    {
+        ColumnSelector selector = componentTool.getColumnSelector();
+        JPanel selectorPanel = selector.getColumnSelectorPanel();
+        return selectorPanel;
+    }
+
+    private PlayFieldHandler getPlayFieldHandler()
+    {
+        PlayFieldHandler playFieldHandler = componentTool.getPlayFieldHandler();
+        return playFieldHandler;
+    }
+
+    private JPanel getScoreDisplay()
+    {
+        ScoreDisplay scoreDisplay = componentTool.getScoreDisplay();
+        JPanel scoreDisplayPanel = scoreDisplay.getSouthPanel();
+        return scoreDisplayPanel;
     }
 
     private void startThread()
@@ -63,8 +73,6 @@ public class GamePanel extends JPanel implements Runnable
         while (isRunning)
         {
             updateAndDrawPlayField();
-            
-            //System.out.println("RUNNING");
         }
     }
 
@@ -73,11 +81,11 @@ public class GamePanel extends JPanel implements Runnable
         long startTime, elapsedTime, delay;
         startTime = getCurrentTime();
 
-        //playField.update();
-        playFieldHandler.repaint();
+        componentTool.getPlayFieldHandler()
+            .repaint();
 
         elapsedTime = getCurrentTime() - startTime;
-        
+
         delay = targetTime - elapsedTime / 1000000;
         compensateDelay(delay);
     }

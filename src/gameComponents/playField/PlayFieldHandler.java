@@ -31,5 +31,4 @@ public class PlayFieldHandler extends JPanel
     {
         playField.placeTokenIfValidColumn(position);
     }
-
 }

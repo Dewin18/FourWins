@@ -6,20 +6,19 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import gameComponents.ObservableComponent;
 import gameComponents.playField.PlayFieldHandler;
 
-public class ColumnSelector 
+public class ColumnSelector extends ObservableComponent
 {
     private ColumnSelectorUI columnSelectorUI;
     private JButton[] buttons;
-    private PlayFieldHandler playFieldHandler;
+    private int column;
 
     public ColumnSelector(PlayFieldHandler playField)
     {
-        this.playFieldHandler = playField;
-
         columnSelectorUI = new ColumnSelectorUI();
-
+        
         registerColumnButtonListener();
     }
 
@@ -41,9 +40,14 @@ public class ColumnSelector
 
                 private void placeToken(int position)
                 {
-                    playFieldHandler.placeToken(position);
+                    setColumn(position);
+                    notifyChanges();
                 }
 
+                private void setColumn(int position)
+                {
+                    column = position;
+                }
             });
         }
     }
@@ -60,5 +64,10 @@ public class ColumnSelector
     public JPanel getColumnSelectorPanel()
     {
         return columnSelectorUI.getSelectorButtonPanel();
+    }
+    
+    public int getCurrentColumn()
+    {
+        return column;
     }
 }
