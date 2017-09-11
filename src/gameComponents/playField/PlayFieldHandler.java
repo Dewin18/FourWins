@@ -18,7 +18,7 @@ public class PlayFieldHandler extends JPanel
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        
+  
         drawPlayFieldScreen(g);
     }
 
@@ -29,6 +29,14 @@ public class PlayFieldHandler extends JPanel
     
     public void placeToken(int position)
     {
+        int currentPlayer = playField.getCurrentPlayer();
+        
         playField.placeTokenIfValidColumn(position);
+        playFieldScreen.updateScreen(position, currentPlayer);
+    }
+    
+    public boolean tokenPlacedAnimation()
+    {
+        return playFieldScreen.tokenPlacedAnimation();
     }
 }

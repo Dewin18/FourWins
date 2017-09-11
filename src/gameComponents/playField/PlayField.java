@@ -104,4 +104,9 @@ public class PlayField
             System.out.println();
         }
     }
+    
+    public int getCurrentPlayer()
+    {
+        return currentPlayerNumber;
+    }
 }

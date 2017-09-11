@@ -9,26 +9,26 @@ public class ComponentTool implements ComponentObserver
     private ColumnSelector columnSelector;
     private PlayFieldHandler playFieldHandler;
     private ScoreDisplay scoreDisplay;
-    
+
     public ComponentTool()
     {
         playFieldHandler = new PlayFieldHandler();
         columnSelector = new ColumnSelector(playFieldHandler);
         scoreDisplay = new ScoreDisplay();
-        
+
         columnSelector.addObserver(this);
     }
-    
+
     public PlayFieldHandler getPlayFieldHandler()
     {
         return playFieldHandler;
     }
-    
+
     public ColumnSelector getColumnSelector()
     {
         return columnSelector;
     }
-    
+
     public ScoreDisplay getScoreDisplay()
     {
         return scoreDisplay;
@@ -37,7 +37,13 @@ public class ComponentTool implements ComponentObserver
     public void update()
     {
         int currentColumn = columnSelector.getCurrentColumn();
-        
-        playFieldHandler.placeToken(currentColumn);
+
+        if (tokenPlaceAnimationIsNotRunning())
+            playFieldHandler.placeToken(currentColumn);
+    }
+
+    private boolean tokenPlaceAnimationIsNotRunning()
+    {
+        return !playFieldHandler.tokenPlacedAnimation();
     }
 }
