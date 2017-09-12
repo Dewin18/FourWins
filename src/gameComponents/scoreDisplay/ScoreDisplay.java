@@ -13,7 +13,7 @@ import main.GamePanel;
 public class ScoreDisplay 
 {
     private final int NO_OF_BLANKS = 20;
-    private final int DISPLAY_FONT_SIZE = 25;
+    private int DISPLAY_FONT_SIZE = 25;
 
     private JPanel southPanel;
     private JPanel displayPanel;
@@ -36,7 +36,7 @@ public class ScoreDisplay
     {
         southPanel = new JPanel();
         
-        southPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        southPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0)); // TODO ?GRIDLAYOUT?
         southPanel.setPreferredSize(new Dimension(GamePanel.WIDTH, 38));
     }
 
@@ -44,6 +44,7 @@ public class ScoreDisplay
     {
         
         displayPanel = new JPanel();
+        
         displayPanel.setPreferredSize(new Dimension(GamePanel.WIDTH - 22, 36));
         displayPanel.setBackground(Color.BLACK);
 
@@ -124,5 +125,10 @@ public class ScoreDisplay
     public JPanel getSouthPanel()
     {
         return southPanel;
+    }
+    
+    public void blowName()
+    {
+        //TODO change name font size, start animation
     }
 }

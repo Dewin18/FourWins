@@ -12,7 +12,7 @@ import main.GamePanel;
 
 public class PlayFieldScreen
 {
-    private final int TOKEN_PLACE_SPEED = 10;
+    private final int TOKEN_PLACE_SPEED = 7;
     private final int TOKEN_SIZE = 70;
     private final int LAST_Y_POSITION = 398;
     private final int VERTICAL_SPACE_BETWEEN_TOKENS = 76;
@@ -129,8 +129,8 @@ public class PlayFieldScreen
     {
         int gap = 10;
 
-        g.drawImage(playFieldScreen, gap, gap, GamePanel.WIDTH - 2 * gap,
-                GamePanel.HEIGHT - 10 * gap, null);
+        g.drawImage(playFieldScreen, gap, gap, GamePanel.WIDTH - 2 * gap, 
+                GamePanel.HEIGHT - 14 * gap, null);
     }
 
     public void updateScreen(int position, int currentPlayer)

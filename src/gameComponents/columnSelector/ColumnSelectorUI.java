@@ -36,8 +36,17 @@ public class ColumnSelectorUI
         initButtonArray();
         setButtonIcon("▾");
         setButtonSize();
+        //removeButtonBorder();
     }
     
+    private void removeButtonBorder()
+    {
+        for (JButton button : buttons)
+        {
+            button.setBorderPainted(false);
+        }
+    }
+
     private void initButtonArray()
     {
         int numberOfButtons = 7;
@@ -61,8 +70,6 @@ public class ColumnSelectorUI
         column_4 = new JButton();
         column_5 = new JButton();
         column_6 = new JButton();
-        
-        column_0.setPreferredSize(new Dimension(72,40));
     }
 
     private void insertColumnButtonsIntoButtonPanel()

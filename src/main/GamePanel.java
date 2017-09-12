@@ -11,7 +11,7 @@ import gameComponents.scoreDisplay.ScoreDisplay;
 public class GamePanel extends JPanel implements Runnable
 {
     public static final int WIDTH = 640;
-    public static final int HEIGHT = 560;
+    public static final int HEIGHT = 600;
 
     private static final long serialVersionUID = 1L;
     private Thread thread;
@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements Runnable
     {
         add(getSelectorPanel(), BorderLayout.NORTH);
         add(getPlayFieldHandler(), BorderLayout.CENTER);
-        add(getScoreDisplay(), BorderLayout.SOUTH);
+        add(getScoreAndDisplay(), BorderLayout.SOUTH);
     }
 
     private JPanel getSelectorPanel()
@@ -54,11 +54,10 @@ public class GamePanel extends JPanel implements Runnable
         return playFieldHandler;
     }
 
-    private JPanel getScoreDisplay()
+    private JPanel getScoreAndDisplay()
     {
-        ScoreDisplay scoreDisplay = componentTool.getScoreDisplay();
-        JPanel scoreDisplayPanel = scoreDisplay.getSouthPanel();
-        return scoreDisplayPanel;
+        JPanel scoreAndDisplayPanel = componentTool.getScoreAndDisplayPanel();
+        return scoreAndDisplayPanel;
     }
 
     private void startThread()
@@ -84,6 +83,8 @@ public class GamePanel extends JPanel implements Runnable
         componentTool.getPlayFieldHandler()
             .repaint();
 
+        componentTool.getSettings().updatePlayTime();
+        
         elapsedTime = getCurrentTime() - startTime;
 
         delay = targetTime - elapsedTime / 1000000;

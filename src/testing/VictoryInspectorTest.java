@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import gameComponents.playField.PlayField;
+import gameComponents.playField.PlayFieldImpl;
 import gameComponents.playField.VictoryInspector;
 
 public class VictoryInspectorTest
@@ -14,7 +14,7 @@ public class VictoryInspectorTest
     private final int PLAYER_ONE = 1;
     private final int PLAYER_TWO = 2;
 
-    private PlayField playField;
+    private PlayFieldImpl playField;
     private int rows = 6;
     private int columns = 7;
 
@@ -28,7 +28,7 @@ public class VictoryInspectorTest
     @Before
     public void init()
     {
-        playField = new PlayField();
+        playField = new PlayFieldImpl();
         inspector = new VictoryInspector(rows, columns);
     }
 

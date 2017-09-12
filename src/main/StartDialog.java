@@ -14,8 +14,8 @@ public class StartDialog
     private JDialog startDialog;
     private JLabel title;
     private JPanel playerNamePanel;
-    private JTextField playerOneName;
-    private JTextField playerTwoName;
+    private JTextField playerOneNameTextField;
+    private JTextField playerTwoNameTextField;
     private JButton startGame;
     private JButton exit;
     
@@ -65,11 +65,11 @@ public class StartDialog
     {
         Dimension textFieldSize = new Dimension(10, 10);
         
-        playerOneName = new JTextField();
-        playerOneName.setSize(textFieldSize);
+        playerOneNameTextField = new JTextField();
+        playerOneNameTextField.setSize(textFieldSize);
         
-        playerTwoName = new JTextField();
-        playerTwoName.setSize(textFieldSize);
+        playerTwoNameTextField = new JTextField();
+        playerTwoNameTextField.setSize(textFieldSize);
     }
 
     private void setLayoutAndSize()
@@ -84,9 +84,9 @@ public class StartDialog
         playerNamePanel.add(new JLabel(""));
         playerNamePanel.add(new JLabel(""));
         playerNamePanel.add(new JLabel("Player 1 Name: "));
-        playerNamePanel.add(playerOneName);
+        playerNamePanel.add(playerOneNameTextField);
         playerNamePanel.add(new JLabel("Player 2 Name: "));
-        playerNamePanel.add(playerTwoName);
+        playerNamePanel.add(playerTwoNameTextField);
         playerNamePanel.add(new JLabel(""));
         playerNamePanel.add(new JLabel(""));
         playerNamePanel.add(startGame);
@@ -123,6 +123,16 @@ public class StartDialog
     
     public void createGameFrame()
     {
-        new GameFrame();
+
+    }
+    
+    public String getNameFromPlayerOneTextField()
+    {
+        return playerOneNameTextField.getText();
+    }
+    
+    public String getNameFromPlayerTwoTextField()
+    {
+        return playerTwoNameTextField.getText();
     }
 }

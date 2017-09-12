@@ -70,4 +70,9 @@ public class ColumnSelector extends ObservableComponent
     {
         return column;
     }
+    
+    public ColumnSelectorUI getColumnSelectorUI()
+    {
+        return columnSelectorUI;
+    }
 }

@@ -23,6 +23,7 @@ public class StartDialogHandler
             {
                 closeDialog();
                 startDialog.createGameFrame();
+                
             }
         });
         
