@@ -21,6 +21,7 @@ public class ScoreDisplay
     private JLabel playerTwoName;
     private JLabel scoreText;
     private Score score;
+    private Font scoreDisplayFont;
 
     public ScoreDisplay()
     {
@@ -103,7 +104,7 @@ public class ScoreDisplay
 
     private void initFont()
     {
-        Font scoreDisplayFont = new Font("Arial", Font.BOLD, DISPLAY_FONT_SIZE);
+        scoreDisplayFont = new Font("Arial", Font.BOLD, DISPLAY_FONT_SIZE);
 
         playerOneName.setFont(scoreDisplayFont);
         playerOneName.setForeground(Color.RED);
@@ -125,10 +126,5 @@ public class ScoreDisplay
     public JPanel getSouthPanel()
     {
         return southPanel;
-    }
-    
-    public void blowName()
-    {
-        //TODO change name font size, start animation
     }
 }

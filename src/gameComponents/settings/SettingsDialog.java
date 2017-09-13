@@ -1,6 +1,5 @@
 package gameComponents.settings;
 
-
 public class SettingsDialog
 {
     private SettingsDialogUI settingsDialogUI;
@@ -9,5 +8,8 @@ public class SettingsDialog
     {
         settingsDialogUI = new SettingsDialogUI();
         settingsDialogUI.showDialog();
+        
+        
     }
+    
 }

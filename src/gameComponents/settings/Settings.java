@@ -8,13 +8,14 @@ import javax.swing.JPanel;
 public class Settings
 {
     SettingsUI settingsUI;
-    
+    SettingsDialog settingsDialog;
+
     public Settings()
     {
         settingsUI = new SettingsUI();
         registerSettingPanelListener();
     }
-    
+
     public JPanel getSettingsPanel()
     {
         return settingsUI.getSettingPanel();
@@ -22,26 +23,27 @@ public class Settings
 
     private void registerSettingPanelListener()
     {
-        settingsUI.getSettingsButton().addActionListener(new ActionListener()
-        {
-            
-            @Override
-            public void actionPerformed(ActionEvent e)
+        settingsUI.getSettingsButton()
+            .addActionListener(new ActionListener()
             {
-                new SettingsDialog();
-            }
-        });
-        
-        settingsUI.getExitButton().addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    settingsDialog = new SettingsDialog();
+                }
+            });
+
+        settingsUI.getExitButton()
+            .addActionListener(new ActionListener()
             {
-                System.exit(0);
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    System.exit(0);
+                }
+            });
     }
-    
+
     public void updatePlayTime()
     {
         settingsUI.updateElapsedTime();

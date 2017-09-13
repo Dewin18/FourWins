@@ -7,13 +7,13 @@ public class PlayFieldHandler extends JPanel
 {
     private static final long serialVersionUID = 1L;
     private PlayFieldScreen playFieldScreen;
-    private PlayFieldImpl playField;
+    private PlayField playField;
     private DrawText startText;
 
     public PlayFieldHandler()
     {
         playFieldScreen = new PlayFieldScreen();
-        playField = new PlayFieldImpl();
+        playField = (PlayField) new PlayFieldImpl();
         startText = new StartText("Player 1 Start!", 140, 350);
     }
 
@@ -50,5 +50,31 @@ public class PlayFieldHandler extends JPanel
     public boolean tokenPlacedAnimation()
     {
         return playFieldScreen.tokenPlacedAnimation();
+    }
+    
+    public int getCurrentPlayer()
+    {
+        return playField.getCurrentPlayer();
+    }
+    
+    public boolean isVictory()
+    {
+        return playField.isVicotry();
+    }
+    
+    public void resetTokenList()
+    {
+        playFieldScreen.getTokens().clear();
+    }
+    
+    public void resetColumns()
+    {
+        playFieldScreen.initColumns();
+        playFieldScreen.initColumnMap();
+    }
+    
+    public void resetVicotry()
+    {
+        playField.setVictoryFalse();
     }
 }

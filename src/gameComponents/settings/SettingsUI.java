@@ -12,6 +12,7 @@ import main.GamePanel;
 public class SettingsUI
 {
     private JPanel settingPanel;
+    private JPanel timerPanel;
 
     private JButton settings; // setNames, restart.. 
     private JButton exit;
@@ -31,8 +32,10 @@ public class SettingsUI
     {
         loadIcons();
         initSettingPanel();
+        initTimerPanel();
         createButtonsAndTimer();
     }
+
 
     private void loadIcons()
     {
@@ -54,6 +57,12 @@ public class SettingsUI
         settingPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 0));
         settingPanel.setPreferredSize(new Dimension(GamePanel.WIDTH, 40));
     }
+    
+    private void initTimerPanel()
+    {
+        timerPanel = new JPanel();
+        timerPanel.setPreferredSize(new Dimension(150, 25));
+    }
 
     private void createButtonsAndTimer()
     {
@@ -62,8 +71,10 @@ public class SettingsUI
         initTimerLabel();
         addIconToSettingButton();
 
+        timerPanel.add(timer);
+
         settingPanel.add(settings);
-        settingPanel.add(timer);
+        settingPanel.add(timerPanel);
         settingPanel.add(exit);
     }
 

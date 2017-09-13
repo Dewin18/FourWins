@@ -8,7 +8,7 @@ import gameComponents.columnSelector.ColumnSelector;
 import gameComponents.playField.PlayFieldHandler;
 import gameComponents.scoreDisplay.ScoreDisplay;
 import gameComponents.settings.Settings;
-import gameComponents.settings.SettingsUI;
+import gameComponents.victoryDisplay.VictoryDialog;
 
 public class ComponentTool implements ComponentObserver
 {
@@ -78,7 +78,17 @@ public class ComponentTool implements ComponentObserver
         if (tokenPlaceAnimationIsNotRunning())
         {
             playFieldHandler.placeToken(currentColumn);
-        }           
+        }         
+        
+        if(playFieldHandler.isVictory())
+        {
+            new VictoryDialog();
+            
+            
+            playFieldHandler.resetTokenList();
+            playFieldHandler.resetColumns();
+            playFieldHandler.resetVicotry();
+        }
     }
 
     private boolean tokenPlaceAnimationIsNotRunning()

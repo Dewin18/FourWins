@@ -33,8 +33,8 @@ public class ColumnSelector extends ObservableComponent
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    JButton button = (JButton) e.getSource();
-                    int position = getButtonPositionInArray(button, buttons);
+                    JButton currentButton = (JButton) e.getSource();
+                    int position = getButtonPositionInArray(currentButton, buttons);
                     placeToken(position);
                 }
 

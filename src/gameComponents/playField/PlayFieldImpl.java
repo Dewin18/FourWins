@@ -1,6 +1,6 @@
 package gameComponents.playField;
 
-public class PlayFieldImpl
+public class PlayFieldImpl implements PlayField
 {
     private VictoryInspector inspector;
     private final int columns = 7;
@@ -36,7 +36,7 @@ public class PlayFieldImpl
         writeOnConsole(playField);
     }
 
-    private boolean isValidColumn(int column)
+    public boolean isValidColumn(int column)
     {
         return playField[0][column] == 0;
     }
@@ -56,11 +56,18 @@ public class PlayFieldImpl
     private void checkForVictory()
     {
         victory = inspector.checkAllCases(playField);
-
-        if (victory)
+            // Im JDialog 
+            /*victory = false;
+            *
+            */
+            //TODO
+            //SHOW WINNING TOKEN SEQUENCE
+            //GIVE POINT TO WINNER
+        
+        if(victory)
         {
-            System.out.println("WON");
-        } //resetPlayField();
+            resetPlayField();
+        }
     }
 
     private void resetPlayField()
@@ -108,5 +115,15 @@ public class PlayFieldImpl
     public int getCurrentPlayer()
     {
         return currentPlayerNumber;
+    }
+    
+    public boolean isVicotry()
+    {
+        return victory;
+    }
+    
+    public void setVictoryFalse()
+    {
+        victory = false;
     }
 }

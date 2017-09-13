@@ -23,13 +23,13 @@ public class PlayFieldScreen
 
     private int positioningCounter = 0;
     private HashMap<Integer, Integer> columnMap;
-    private int column0 = LAST_Y_POSITION;
-    private int column1 = LAST_Y_POSITION;
-    private int column2 = LAST_Y_POSITION;
-    private int column3 = LAST_Y_POSITION;
-    private int column4 = LAST_Y_POSITION;
-    private int column5 = LAST_Y_POSITION;
-    private int column6 = LAST_Y_POSITION;
+    private int column0;
+    private int column1;
+    private int column2;
+    private int column3;
+    private int column4;
+    private int column5;
+    private int column6;
 
     private int currentColumnSize;
     private boolean tokenIsPlaced;
@@ -43,10 +43,22 @@ public class PlayFieldScreen
         tokens = new ArrayList<>();
         columnMap = new HashMap<Integer, Integer>();
 
+        initColumns();
         initColumnMap();
     }
 
-    private void initColumnMap()
+    public void initColumns()
+    {
+        column0 = LAST_Y_POSITION;
+        column1 = LAST_Y_POSITION;
+        column2 = LAST_Y_POSITION;
+        column3 = LAST_Y_POSITION;
+        column4 = LAST_Y_POSITION;
+        column5 = LAST_Y_POSITION;
+        column6 = LAST_Y_POSITION;
+    }
+
+    public void initColumnMap()
     {
         columnMap.put(0, column0);
         columnMap.put(1, column1);
@@ -188,4 +200,9 @@ public class PlayFieldScreen
     {
         return tokenIsPlaced;
     }
+    
+    public ArrayList<Token> getTokens()
+    {
+        return tokens;
+    } 
 }
