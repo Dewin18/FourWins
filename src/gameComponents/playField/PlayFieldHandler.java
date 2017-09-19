@@ -14,7 +14,7 @@ public class PlayFieldHandler extends JPanel
     {
         playFieldScreen = new PlayFieldScreen();
         playField = (PlayField) new PlayFieldImpl();
-        startText = new StartText("Player 1 Start!", 140, 350);
+        startText = new StartText("Player 1 Start!", 150, 350);
     }
 
     public void paintComponent(Graphics g)
@@ -51,28 +51,41 @@ public class PlayFieldHandler extends JPanel
     {
         return playFieldScreen.tokenPlacedAnimation();
     }
-    
+
     public int getCurrentPlayer()
     {
         return playField.getCurrentPlayer();
     }
-    
+
+    public int getWinner()
+    {
+        int winner = playField.getCurrentPlayer();
+
+        switch (winner)
+        {
+            case 1: return 2;
+            case 2: return 1;
+            default : return 0;
+        }
+    }
+
     public boolean isVictory()
     {
         return playField.isVicotry();
     }
-    
+
     public void resetTokenList()
     {
-        playFieldScreen.getTokens().clear();
+        playFieldScreen.getTokens()
+            .clear();
     }
-    
+
     public void resetColumns()
     {
         playFieldScreen.initColumns();
         playFieldScreen.initColumnMap();
     }
-    
+
     public void resetVicotry()
     {
         playField.setVictoryFalse();

@@ -36,13 +36,12 @@ public class SettingsUI
         createButtonsAndTimer();
     }
 
-
     private void loadIcons()
     {
         try
         {
             settingsIcon = ImageIO
-                .read(getClass().getResource("/settingsIcon.png"));
+                .read(getClass().getResource("/keyboard.png"));
             exitIcon = ImageIO.read(getClass().getResource("/exitIcon.png"));
         }
         catch (IOException e)
@@ -57,7 +56,7 @@ public class SettingsUI
         settingPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 0));
         settingPanel.setPreferredSize(new Dimension(GamePanel.WIDTH, 40));
     }
-    
+
     private void initTimerPanel()
     {
         timerPanel = new JPanel();
@@ -67,7 +66,7 @@ public class SettingsUI
     private void createButtonsAndTimer()
     {
         initButtons();
-        removeButtonsBorders();
+       // removeButtonsBorders();
         initTimerLabel();
         addIconToSettingButton();
 

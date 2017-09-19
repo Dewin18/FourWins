@@ -10,62 +10,81 @@ import javax.swing.JPanel;
 
 import main.GamePanel;
 
-public class ScoreDisplay 
+public class ScoreDisplay
 {
     private final int NO_OF_BLANKS = 20;
     private int DISPLAY_FONT_SIZE = 25;
 
-    private JPanel southPanel;
     private JPanel displayPanel;
-    private JLabel playerOneName;
-    private JLabel playerTwoName;
+    private JPanel playerOneNamePanel;
+    private JPanel scorePanel;
+    private JPanel playerTwoNamePanel;
+
+    private JLabel playerOneNameLabel;
+    private JLabel playerTwoNameLabel;
     private JLabel scoreText;
+
     private Score score;
     private Font scoreDisplayFont;
 
+    private String playerOneName;
+    private String playerTwoName;
+
     public ScoreDisplay()
     {
-        initSouthDisplay();
+        playerOneName = "Player 1";
+        playerTwoName = "Player 2";
+
         initDisplayPanel();
+        initPlayerAndScorePanels();
         initPlayerNames();
         initScore();
         initFont();
         combineNamesAndScore();
     }
 
-    private void initSouthDisplay()
-    {
-        southPanel = new JPanel();
-        
-        southPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0)); // TODO ?GRIDLAYOUT?
-        southPanel.setPreferredSize(new Dimension(GamePanel.WIDTH, 38));
-    }
-
     private void initDisplayPanel()
     {
-        
         displayPanel = new JPanel();
-        
-        displayPanel.setPreferredSize(new Dimension(GamePanel.WIDTH - 22, 36));
-        displayPanel.setBackground(Color.BLACK);
 
-        southPanel.add(displayPanel);
+        displayPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0)); // TODO ?GRIDLAYOUT?
+        displayPanel.setPreferredSize(new Dimension(GamePanel.WIDTH, 38));
+    }
+
+    private void initPlayerAndScorePanels()
+    {
+        Color panelColor = Color.BLACK;
+
+        playerOneNamePanel = new JPanel();
+        scorePanel = new JPanel();
+        playerTwoNamePanel = new JPanel();
+
+        playerOneNamePanel.setPreferredSize(new Dimension(260, 38));
+        scorePanel.setPreferredSize(new Dimension(100, 38));
+        playerTwoNamePanel.setPreferredSize(new Dimension(260, 38));
+
+        playerOneNamePanel.setBackground(panelColor);
+        scorePanel.setBackground(panelColor);
+        playerTwoNamePanel.setBackground(panelColor);
     }
 
     private void initPlayerNames()
     {
-        playerOneName = new JLabel(getPlayerOneName());
-        playerTwoName = new JLabel(getPlayerTwoName());
+        playerOneNameLabel = new JLabel(playerOneDefaultName());
+        playerTwoNameLabel = new JLabel(playerTwoDefaultName());
+
+        playerOneNamePanel.add(playerOneNameLabel);
+        playerTwoNamePanel.add(playerTwoNameLabel);
     }
 
-    private String getPlayerOneName()
+    private String playerOneDefaultName()
     {
-        return "Player 1" + generateEmptyString(NO_OF_BLANKS);
+        return playerOneName + generateEmptyString(NO_OF_BLANKS);
     }
 
-    private String getPlayerTwoName()
+    private String playerTwoDefaultName()
     {
-        return generateEmptyString(NO_OF_BLANKS) + "Player 2";
+        return generateEmptyString(NO_OF_BLANKS) + playerTwoName;
     }
 
     private String generateEmptyString(int numberOfBlanks)
@@ -80,37 +99,20 @@ public class ScoreDisplay
 
     private void initScore()
     {
-        score = new Score();
-
-        String playerOneNameAndScore = score.getPlayerOneScoreText();
-        String playerTwoNameAndScore = score.getPlayerTwoScoreText();
-        String nameScoreText = buildNameScoreText(playerOneNameAndScore,
-                playerTwoNameAndScore);
-
-        scoreText = new JLabel(nameScoreText);
-    }
-
-    private String buildNameScoreText(String playerOneNameAndScore,
-            String playerTwoNameAndScore)
-    {
-        StringBuilder nameScoreText = new StringBuilder();
-
-        nameScoreText.append(playerOneNameAndScore);
-        nameScoreText.append("  -  ");
-        nameScoreText.append(playerTwoNameAndScore);
-
-        return nameScoreText.toString();
+        score = new Score(0, 0);
+        scoreText = new JLabel(score.toString());
+        scorePanel.add(scoreText);
     }
 
     private void initFont()
     {
         scoreDisplayFont = new Font("Arial", Font.BOLD, DISPLAY_FONT_SIZE);
 
-        playerOneName.setFont(scoreDisplayFont);
-        playerOneName.setForeground(Color.RED);
+        playerOneNameLabel.setFont(scoreDisplayFont);
+        playerOneNameLabel.setForeground(Color.RED);
 
-        playerTwoName.setFont(scoreDisplayFont);
-        playerTwoName.setForeground(Color.YELLOW);
+        playerTwoNameLabel.setFont(scoreDisplayFont);
+        playerTwoNameLabel.setForeground(Color.YELLOW);
 
         scoreText.setFont(scoreDisplayFont);
         scoreText.setForeground(Color.GRAY);
@@ -118,13 +120,52 @@ public class ScoreDisplay
 
     private void combineNamesAndScore()
     {
-        displayPanel.add(playerOneName);
-        displayPanel.add(scoreText);
-        displayPanel.add(playerTwoName);
+        displayPanel.add(playerOneNamePanel);
+        displayPanel.add(scorePanel);
+        displayPanel.add(playerTwoNamePanel);
     }
-    
+
+    public void setPlayerOneName(String name)
+    {
+        playerOneName = name;
+        playerOneNameLabel
+            .setText(name.concat(generateEmptyString(NO_OF_BLANKS)));
+    }
+
+    public void setPlayerTwoName(String name)
+    {
+        playerTwoName = name;
+        playerTwoNameLabel
+            .setText(generateEmptyString(NO_OF_BLANKS).concat(name));
+    }
+
     public JPanel getSouthPanel()
     {
-        return southPanel;
+        return displayPanel;
+    }
+
+    public void increasePlayerOneScore()
+    {
+        score.increasePlayerOneScore();
+        updateScoreText();
+    }
+
+    private void updateScoreText()
+    {
+        scoreText.setText(score.toString());
+    }
+
+    public void increasePlayerTwoScore()
+    {
+        score.increasePlayerTwoScore();
+        updateScoreText();
+    }
+
+    public String getNameFromPlayerNumber(int playerNumber)
+    {
+        if (playerNumber == 1)
+            return playerOneName;
+        else
+            return playerTwoName;
     }
 }

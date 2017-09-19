@@ -7,9 +7,11 @@ public class VictoryDialog
 {
     private VictoryDialogUI victoryDialogUI;
     
-    public VictoryDialog()
+    public VictoryDialog(String winnerName)
     {
         victoryDialogUI = new VictoryDialogUI();
+        victoryDialogUI.setWinner(winnerName);
+        
         registerVictoryDialogListener();
         victoryDialogUI.showDialog();
     }

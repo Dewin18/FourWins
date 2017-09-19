@@ -14,6 +14,7 @@ public class ColumnSelector extends ObservableComponent
     private ColumnSelectorUI columnSelectorUI;
     private JButton[] buttons;
     private int column;
+    private boolean buttonPressed;
 
     public ColumnSelector(PlayFieldHandler playField)
     {
@@ -33,6 +34,7 @@ public class ColumnSelector extends ObservableComponent
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
+                    buttonPressed = true;
                     JButton currentButton = (JButton) e.getSource();
                     int position = getButtonPositionInArray(currentButton, buttons);
                     placeToken(position);
@@ -74,5 +76,20 @@ public class ColumnSelector extends ObservableComponent
     public ColumnSelectorUI getColumnSelectorUI()
     {
         return columnSelectorUI;
+    }
+    
+    public JButton[] getButtons()
+    {
+        return columnSelectorUI.getButtons();
+    }
+    
+    public void disablButtonPressed()
+    {
+        buttonPressed = false;
+    }
+    
+    public boolean isButtonPressed()
+    {
+        return buttonPressed;
     }
 }

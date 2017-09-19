@@ -8,6 +8,7 @@ import gameComponents.columnSelector.ColumnSelector;
 import gameComponents.playField.PlayFieldHandler;
 import gameComponents.scoreDisplay.ScoreDisplay;
 import gameComponents.settings.Settings;
+import gameComponents.settings.SettingsDialog;
 import gameComponents.victoryDisplay.VictoryDialog;
 
 public class ComponentTool implements ComponentObserver
@@ -16,19 +17,24 @@ public class ComponentTool implements ComponentObserver
     private PlayFieldHandler playFieldHandler;
     private ScoreDisplay scoreDisplay;
     private Settings settings;
+    private SettingsDialog settingsDialog;
     private JPanel scoreAndSettingsPanel;
 
     public ComponentTool()
     {
+        createComponents();
+        initScoreAndSettingsPanel();
+        combineScoreAndSettingsPanel();
+        addComponentObservers();
+    }
+
+    private void createComponents()
+    {
         playFieldHandler = new PlayFieldHandler();
         columnSelector = new ColumnSelector(playFieldHandler);
         scoreDisplay = new ScoreDisplay();
-        settings = new Settings();
-        
-        initScoreAndSettingsPanel();
-        combineScoreAndSettingsPanel();
-        
-        columnSelector.addObserver(this);
+        settingsDialog = new SettingsDialog();
+        settings = new Settings(settingsDialog);
     }
 
     private void initScoreAndSettingsPanel()
@@ -41,9 +47,96 @@ public class ComponentTool implements ComponentObserver
     {
         JPanel settingsPanel = settings.getSettingsPanel();
         JPanel scoreDisplayPanel = scoreDisplay.getSouthPanel();
-        
+
         scoreAndSettingsPanel.add(scoreDisplayPanel, BorderLayout.CENTER);
         scoreAndSettingsPanel.add(settingsPanel, BorderLayout.SOUTH);
+    }
+
+    private void addComponentObservers()
+    {
+        columnSelector.addObserver(this);
+        settingsDialog.addObserver(this);
+    }
+
+    public void update()
+    {
+        checkIfPlaceTokenButtonIsPressed();
+        checkForNameChange();
+    }
+
+    private void checkIfPlaceTokenButtonIsPressed()
+    {
+        if (columnSelector.isButtonPressed())
+        {
+            checkForPlaceTokenAnimation();
+            columnSelector.disablButtonPressed();
+            checkForVictory();
+        }
+    }
+
+    private void checkForPlaceTokenAnimation()
+    {
+        if (tokenPlaceAnimationIsNotRunning())
+        {
+            int currentColumn = columnSelector.getCurrentColumn();
+
+            playFieldHandler.placeToken(currentColumn);
+        }
+    }
+
+    private void checkForVictory()
+    {
+        if (playFieldHandler.isVictory())
+        {
+
+            /* TODO
+             * 
+             * create Method in scoreDisplay int getNameFromPlayerNumber(int playerNumber)
+             * get PlayerName from score Display with (winner) above
+             * store name in VicotryDialog through String argument in 
+             * victoryDialog(String playerName)
+             */
+            
+            int winnerNumber = playFieldHandler.getWinner();
+            
+            increaseWinnerScore(winnerNumber);
+            
+            String winnerName = scoreDisplay.getNameFromPlayerNumber(winnerNumber);
+            
+            new VictoryDialog(winnerName);
+
+            playFieldHandler.resetTokenList();
+            playFieldHandler.resetColumns();
+            playFieldHandler.resetVicotry();
+        }
+    }
+
+    private void increaseWinnerScore(int winner)
+    {
+        if (winner == 1)
+            scoreDisplay.increasePlayerOneScore();
+        else
+            scoreDisplay.increasePlayerTwoScore();
+
+    }
+
+    private void checkForNameChange()
+    {
+        if (settingsDialog.namesAreChanged())
+        {
+            String playerOneName = settingsDialog.getPlayerOneName();
+            String playerTwoName = settingsDialog.getPlayerTwoName();
+
+            scoreDisplay.setPlayerOneName(playerOneName);
+            scoreDisplay.setPlayerTwoName(playerTwoName);
+
+            settingsDialog.disableNamesAreChanged();
+        }
+    }
+
+    private boolean tokenPlaceAnimationIsNotRunning()
+    {
+        return !playFieldHandler.tokenPlacedAnimation();
     }
 
     public PlayFieldHandler getPlayFieldHandler()
@@ -60,39 +153,14 @@ public class ComponentTool implements ComponentObserver
     {
         return scoreDisplay;
     }
-    
+
     public JPanel getScoreAndDisplayPanel()
     {
         return scoreAndSettingsPanel;
     }
-    
+
     public Settings getSettings()
     {
         return settings;
-    }
-
-    public void update()
-    {
-        int currentColumn = columnSelector.getCurrentColumn();
-
-        if (tokenPlaceAnimationIsNotRunning())
-        {
-            playFieldHandler.placeToken(currentColumn);
-        }         
-        
-        if(playFieldHandler.isVictory())
-        {
-            new VictoryDialog();
-            
-            
-            playFieldHandler.resetTokenList();
-            playFieldHandler.resetColumns();
-            playFieldHandler.resetVicotry();
-        }
-    }
-
-    private boolean tokenPlaceAnimationIsNotRunning()
-    {
-        return !playFieldHandler.tokenPlacedAnimation();
     }
 }

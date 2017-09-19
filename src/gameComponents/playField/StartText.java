@@ -21,7 +21,7 @@ public class StartText extends DrawText
 
     private void initFont()
     {
-        font = new Font("Dialog", Font.BOLD, FONT_SIZE );
+        font = new Font("Arial", Font.BOLD, FONT_SIZE );
     }
 
     @Override

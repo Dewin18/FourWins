@@ -3,16 +3,20 @@ package gameComponents.settings;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 
-public class Settings
-{
-    SettingsUI settingsUI;
-    SettingsDialog settingsDialog;
+import gameComponents.ComponentObserver;
 
-    public Settings()
+public class Settings //TODO 
+{
+    private SettingsUI settingsUI;
+    private SettingsDialog settingsDialog;
+
+    public Settings(SettingsDialog settingsDialog)
     {
         settingsUI = new SettingsUI();
+        this.settingsDialog = settingsDialog;
         registerSettingPanelListener();
     }
 
@@ -29,7 +33,7 @@ public class Settings
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    settingsDialog = new SettingsDialog();
+                    settingsDialog.getSettingsDialogUI().showDialog();
                 }
             });
 
@@ -47,5 +51,10 @@ public class Settings
     public void updatePlayTime()
     {
         settingsUI.updateElapsedTime();
+    }
+    
+    public SettingsDialog getSettingsDialog()
+    {
+        return settingsDialog;
     }
 }

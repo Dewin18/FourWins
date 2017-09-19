@@ -5,30 +5,10 @@ public class Score
     private int playerOneScore;
     private int playerTwoScore;
     
-    public Score()
+    public Score(int playerOneScore, int playerTwoScore)
     {
-        playerOneScore = 0;
-        playerTwoScore = 0;
-    }
-    
-    public int getPlayerOneScoreValue()
-    {
-        return playerOneScore;
-    }
-    
-    public int getPlayerTwoScoreValue()
-    {
-        return playerTwoScore;
-    }
-    
-    public String getPlayerOneScoreText()
-    {
-        return String.valueOf(playerOneScore);
-    }
-    
-    public String getPlayerTwoScoreText()
-    {
-        return String.valueOf(playerTwoScore);
+        this.playerOneScore = playerOneScore;
+        this.playerTwoScore = playerTwoScore;
     }
     
     public void increasePlayerOneScore()
@@ -39,5 +19,11 @@ public class Score
     public void increasePlayerTwoScore()
     {
         playerTwoScore++;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return playerOneScore + "  -  " + playerTwoScore;
     }
 }
