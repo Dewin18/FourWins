@@ -20,16 +20,19 @@ public class SettingsUI
     private BufferedImage settingsIcon;
     private BufferedImage exitIcon;
 
-    private JLabel timer;
+    private JLabel timerLabel;
     private long nextSecondsRecording = 0;
 
     private long elapsedTime = 0;
 
     private long firstSecondsRecording;
     private long seconds = 0;
+    private StopWatch stopWatch;
 
     public SettingsUI()
     {
+        stopWatch = new StopWatch();
+        
         loadIcons();
         initSettingPanel();
         initTimerPanel();
@@ -70,7 +73,7 @@ public class SettingsUI
         initTimerLabel();
         addIconToSettingButton();
 
-        timerPanel.add(timer);
+        timerPanel.add(timerLabel);
 
         settingPanel.add(settings);
         settingPanel.add(timerPanel);
@@ -79,7 +82,7 @@ public class SettingsUI
 
     private void initTimerLabel()
     {
-        timer = new JLabel();
+        timerLabel = new JLabel();
     }
 
     private void initButtons()
@@ -115,19 +118,9 @@ public class SettingsUI
         return exit;
     }
 
-    public void updateElapsedTime() //TODO FIX flow Layout
+    public void updateElapsedTime() 
     {
-        firstSecondsRecording = elapsedTime;
-        elapsedTime = System.nanoTime() / 1000000000 % 10;
-        nextSecondsRecording = elapsedTime;
-
-        if (secondsHaveChanged()) seconds++;
-
-        timer.setText("Elapsed: " + seconds);
-    }
-
-    private boolean secondsHaveChanged()
-    {
-        return firstSecondsRecording != nextSecondsRecording;
+        stopWatch.updateElapsedTime();
+        timerLabel.setText(stopWatch.getElapsedTime());
     }
 }

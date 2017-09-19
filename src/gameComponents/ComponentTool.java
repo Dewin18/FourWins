@@ -62,7 +62,9 @@ public class ComponentTool implements ComponentObserver
     {
         checkIfPlaceTokenButtonIsPressed();
         checkForNameChange();
+        
     }
+
 
     private void checkIfPlaceTokenButtonIsPressed()
     {
@@ -71,6 +73,16 @@ public class ComponentTool implements ComponentObserver
             checkForPlaceTokenAnimation();
             columnSelector.disablButtonPressed();
             checkForVictory();
+            checkIfPlayFieldIsFull();
+        }
+    }
+
+    private void checkIfPlayFieldIsFull()
+    {
+        if(playFieldHandler.isPlayFieldFull())
+        {
+            playFieldHandler.disablePlayFieldIsFull();
+           // resetPlayField();
         }
     }
 
@@ -88,15 +100,6 @@ public class ComponentTool implements ComponentObserver
     {
         if (playFieldHandler.isVictory())
         {
-
-            /* TODO
-             * 
-             * create Method in scoreDisplay int getNameFromPlayerNumber(int playerNumber)
-             * get PlayerName from score Display with (winner) above
-             * store name in VicotryDialog through String argument in 
-             * victoryDialog(String playerName)
-             */
-            
             int winnerNumber = playFieldHandler.getWinner();
             
             increaseWinnerScore(winnerNumber);
@@ -105,10 +108,15 @@ public class ComponentTool implements ComponentObserver
             
             new VictoryDialog(winnerName);
 
-            playFieldHandler.resetTokenList();
-            playFieldHandler.resetColumns();
-            playFieldHandler.resetVicotry();
+            resetPlayField();
         }
+    }
+
+    private void resetPlayField()
+    {
+        playFieldHandler.resetTokenList();
+        playFieldHandler.resetColumns();
+        playFieldHandler.resetVicotry();
     }
 
     private void increaseWinnerScore(int winner)

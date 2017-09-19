@@ -17,4 +17,6 @@ public interface PlayField
     public void writeOnConsole(int[][] playField);
     
     public void setVictoryFalse();
+    
+    public void disablePlayFieldIsFull();
 }

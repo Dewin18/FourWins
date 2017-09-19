@@ -69,6 +69,16 @@ public class PlayFieldHandler extends JPanel
         }
     }
 
+    public boolean isPlayFieldFull()
+    {
+        return playField.isPlayFieldFull();
+    }
+    
+    public void disablePlayFieldIsFull()
+    {
+        playField.disablePlayFieldIsFull();
+    }
+    
     public boolean isVictory()
     {
         return playField.isVicotry();

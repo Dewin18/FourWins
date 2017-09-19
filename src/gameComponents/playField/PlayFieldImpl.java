@@ -9,6 +9,7 @@ public class PlayFieldImpl implements PlayField
     private int[][] playField;
     private int currentPlayerNumber = 1;
     private boolean victory;
+    private boolean isFull;
 
     public PlayFieldImpl()
     {
@@ -26,9 +27,9 @@ public class PlayFieldImpl implements PlayField
             placeToken(column);
             checkForVictory();
 
-            if (isPlayFieldFull())
+            if (checkIfPlayFieldIsFull())
             {
-                resetPlayField();
+                isFull = true;
             }
             changePlayer();
         }
@@ -72,7 +73,6 @@ public class PlayFieldImpl implements PlayField
 
     private void resetPlayField()
     {
-        System.out.println("FULL");
         playField = new int[rows][columns];
     }
 
@@ -87,6 +87,16 @@ public class PlayFieldImpl implements PlayField
     }
 
     public boolean isPlayFieldFull()
+    {
+       return isFull;
+    }
+    
+    public void disablePlayFieldIsFull()
+    {
+        isFull = false;
+    }
+    
+    private boolean checkIfPlayFieldIsFull()
     {
         for (int i = 0; i < columns; i++)
         {
