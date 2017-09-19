@@ -90,4 +90,9 @@ public class PlayFieldHandler extends JPanel
     {
         playField.setVictoryFalse();
     }
+    
+    public PlayField getPlayField()
+    {
+        return playField;
+    }
 }

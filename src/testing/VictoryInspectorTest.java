@@ -5,8 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import gameComponents.playField.PlayField;
+import gameComponents.playField.PlayFieldHandler;
 import gameComponents.playField.PlayFieldImpl;
 import gameComponents.playField.VictoryInspector;
+import jdk.net.NetworkPermission;
 
 public class VictoryInspectorTest
 {
@@ -14,10 +17,10 @@ public class VictoryInspectorTest
     private final int PLAYER_ONE = 1;
     private final int PLAYER_TWO = 2;
 
-    private PlayFieldImpl playField;
+    private PlayFieldHandler playFieldHandler;
+    private PlayField playField;
     private int rows = 6;
     private int columns = 7;
-
     private VictoryInspector inspector;
 
     public VictoryInspectorTest()
@@ -28,7 +31,9 @@ public class VictoryInspectorTest
     @Before
     public void init()
     {
-        playField = new PlayFieldImpl();
+        playFieldHandler = new PlayFieldHandler();
+        playField = playFieldHandler.getPlayField();
+        
         inspector = new VictoryInspector(rows, columns);
     }
 
@@ -80,6 +85,8 @@ public class VictoryInspectorTest
     @Test
     public void testFourEqualTokensInRowIsWin()
     {
+        assertFalse(playFieldHandler.isVictory());
+        
         playField.placeTokenIfValidColumn(0);
         playField.placeTokenIfValidColumn(0);
         playField.placeTokenIfValidColumn(1);
@@ -88,16 +95,14 @@ public class VictoryInspectorTest
         playField.placeTokenIfValidColumn(2);
         playField.placeTokenIfValidColumn(3);
         
-        assertTrue(inspector.checkAllCases(playField.getField()));
-        
-        assertTrue(inspector.checkRows(playField.getField()));
-        assertFalse(inspector.checkColumns(playField.getField()));
-        assertFalse(inspector.checkDiagonal(playField.getField()));
+        assertTrue(playFieldHandler.isVictory());
     }
 
     @Test
     public void testFourEqualTokensInColumnIsWin()
     {
+        assertFalse(playFieldHandler.isVictory());
+        
         playField.placeTokenIfValidColumn(0);
         playField.placeTokenIfValidColumn(1);
         playField.placeTokenIfValidColumn(0);
@@ -106,16 +111,14 @@ public class VictoryInspectorTest
         playField.placeTokenIfValidColumn(1);
         playField.placeTokenIfValidColumn(0);
         
-        assertTrue(inspector.checkAllCases(playField.getField()));
-        
-        assertFalse(inspector.checkRows(playField.getField()));
-        assertTrue(inspector.checkColumns(playField.getField()));
-        assertFalse(inspector.checkDiagonal(playField.getField()));
+        assertTrue(playFieldHandler.isVictory());
     }
     
     @Test
     public void testFourEqualTokensDiagonalIsWin()
     {
+        assertFalse(playFieldHandler.isVictory());
+        
         playField.placeTokenIfValidColumn(0);
         playField.placeTokenIfValidColumn(1);
         playField.placeTokenIfValidColumn(1);
@@ -128,11 +131,7 @@ public class VictoryInspectorTest
         playField.placeTokenIfValidColumn(3);
         playField.placeTokenIfValidColumn(3);
         playField.placeTokenIfValidColumn(3);
-        
-        assertTrue(inspector.checkAllCases(playField.getField()));
-        
-        assertFalse(inspector.checkRows(playField.getField()));
-        assertFalse(inspector.checkColumns(playField.getField()));
-        assertTrue(inspector.checkDiagonal(playField.getField()));
+     
+        assertTrue(playFieldHandler.isVictory());
     }
 }
