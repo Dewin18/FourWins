@@ -62,9 +62,14 @@ public class ComponentTool implements ComponentObserver
     {
         checkIfPlaceTokenButtonIsPressed();
         checkForNameChange();
-        
-    }
 
+        //        if(playFieldHandler.isPlayFieldFull())
+        //        {
+        //            playFieldHandler.resetTokenList();
+        //            playFieldHandler.resetColumns();
+        //            playFieldHandler.disablePlayFieldIsFull();
+        //        }
+    }
 
     private void checkIfPlaceTokenButtonIsPressed()
     {
@@ -73,16 +78,6 @@ public class ComponentTool implements ComponentObserver
             checkForPlaceTokenAnimation();
             columnSelector.disablButtonPressed();
             checkForVictory();
-            checkIfPlayFieldIsFull();
-        }
-    }
-
-    private void checkIfPlayFieldIsFull()
-    {
-        if(playFieldHandler.isPlayFieldFull())
-        {
-            playFieldHandler.disablePlayFieldIsFull();
-           // resetPlayField();
         }
     }
 
@@ -90,10 +85,22 @@ public class ComponentTool implements ComponentObserver
     {
         if (tokenPlaceAnimationIsNotRunning())
         {
-            int currentColumn = columnSelector.getCurrentColumn();
-
-            playFieldHandler.placeToken(currentColumn);
+            if (playFieldHandler.isPlayFieldFull())
+            {
+                playFieldHandler.resetTokenList();
+                playFieldHandler.resetColumns();
+                playFieldHandler.disablePlayFieldIsFull();
+            }
+            
+            placeToken();
         }
+
+    }
+
+    private void placeToken()
+    {
+        int currentColumn = columnSelector.getCurrentColumn();
+        playFieldHandler.placeToken(currentColumn);
     }
 
     private void checkForVictory()
@@ -101,14 +108,16 @@ public class ComponentTool implements ComponentObserver
         if (playFieldHandler.isVictory())
         {
             int winnerNumber = playFieldHandler.getWinner();
-            
+
             increaseWinnerScore(winnerNumber);
-            
-            String winnerName = scoreDisplay.getNameFromPlayerNumber(winnerNumber);
-            
+
+            String winnerName = scoreDisplay
+                .getNameFromPlayerNumber(winnerNumber);
+
             new VictoryDialog(winnerName);
 
             resetPlayField();
+            playFieldHandler.resetVicotry();
         }
     }
 
@@ -116,7 +125,6 @@ public class ComponentTool implements ComponentObserver
     {
         playFieldHandler.resetTokenList();
         playFieldHandler.resetColumns();
-        playFieldHandler.resetVicotry();
     }
 
     private void increaseWinnerScore(int winner)

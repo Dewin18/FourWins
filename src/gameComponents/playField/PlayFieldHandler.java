@@ -1,6 +1,8 @@
 package gameComponents.playField;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
 public class PlayFieldHandler extends JPanel
@@ -88,6 +90,11 @@ public class PlayFieldHandler extends JPanel
     {
         playFieldScreen.getTokens()
             .clear();
+    }
+    
+    public ArrayList<Token> getTokens()
+    {
+        return playFieldScreen.getTokens();
     }
 
     public void resetColumns()

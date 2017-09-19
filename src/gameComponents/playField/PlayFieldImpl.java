@@ -9,7 +9,7 @@ public class PlayFieldImpl implements PlayField
     private int[][] playField;
     private int currentPlayerNumber = 1;
     private boolean victory;
-    private boolean isFull;
+    private boolean isFull = false;
 
     public PlayFieldImpl()
     {
@@ -30,6 +30,7 @@ public class PlayFieldImpl implements PlayField
             if (checkIfPlayFieldIsFull())
             {
                 isFull = true;
+                resetPlayField();
             }
             changePlayer();
         }
@@ -57,13 +58,6 @@ public class PlayFieldImpl implements PlayField
     private void checkForVictory()
     {
         victory = inspector.checkAllCases(playField);
-            // Im JDialog 
-            /*victory = false;
-            *
-            */
-            //TODO
-            //SHOW WINNING TOKEN SEQUENCE
-            //GIVE POINT TO WINNER
         
         if(victory)
         {
