@@ -62,13 +62,6 @@ public class ComponentTool implements ComponentObserver
     {
         checkIfPlaceTokenButtonIsPressed();
         checkForNameChange();
-
-        //        if(playFieldHandler.isPlayFieldFull())
-        //        {
-        //            playFieldHandler.resetTokenList();
-        //            playFieldHandler.resetColumns();
-        //            playFieldHandler.disablePlayFieldIsFull();
-        //        }
     }
 
     private void checkIfPlaceTokenButtonIsPressed()
@@ -83,18 +76,10 @@ public class ComponentTool implements ComponentObserver
 
     private void checkForPlaceTokenAnimation()
     {
-        if (tokenPlaceAnimationIsNotRunning())
+        if (tokenPlaceAnimationIsNotRunning() && !playFieldHandler.isPlayFieldFull())
         {
-            if (playFieldHandler.isPlayFieldFull())
-            {
-                playFieldHandler.resetTokenList();
-                playFieldHandler.resetColumns();
-                playFieldHandler.disablePlayFieldIsFull();
-            }
-            
             placeToken();
         }
-
     }
 
     private void placeToken()

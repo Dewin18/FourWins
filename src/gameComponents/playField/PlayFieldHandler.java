@@ -11,12 +11,14 @@ public class PlayFieldHandler extends JPanel
     private PlayFieldScreen playFieldScreen;
     private PlayField playField;
     private DrawText startText;
+    private DrawText fullText;
 
     public PlayFieldHandler()
     {
         playFieldScreen = new PlayFieldScreen();
         playField = (PlayField) new PlayFieldImpl();
         startText = new StartText("Player 1 Start!", 150, 350);
+        fullText = new StartText("FULL!!!", 250, 350);
     }
 
     public void paintComponent(Graphics g)
@@ -28,6 +30,19 @@ public class PlayFieldHandler extends JPanel
         if (startTextIsVisible())
         {
             startText.draw(g);
+        }
+
+        if (playField.isPlayFieldFull()) // TODO refactoring
+        {
+            fullText.draw(g);
+
+            if(fullText.getTextVisibilityValue() < 20)
+            {
+                resetColumns();
+                resetTokenList();
+                playField.disablePlayFieldIsFull();
+                fullText.reset();
+            }
         }
     }
 
@@ -65,9 +80,9 @@ public class PlayFieldHandler extends JPanel
 
         switch (winner)
         {
-            case 1: return 2;
-            case 2: return 1;
-            default : return 0;
+        case 1:  return 2;
+        case 2:  return 1;
+        default: return 0;
         }
     }
 
@@ -75,12 +90,12 @@ public class PlayFieldHandler extends JPanel
     {
         return playField.isPlayFieldFull();
     }
-    
+
     public void disablePlayFieldIsFull()
     {
         playField.disablePlayFieldIsFull();
     }
-    
+
     public boolean isVictory()
     {
         return playField.isVicotry();
@@ -91,7 +106,7 @@ public class PlayFieldHandler extends JPanel
         playFieldScreen.getTokens()
             .clear();
     }
-    
+
     public ArrayList<Token> getTokens()
     {
         return playFieldScreen.getTokens();
@@ -107,7 +122,7 @@ public class PlayFieldHandler extends JPanel
     {
         playField.setVictoryFalse();
     }
-    
+
     public PlayField getPlayField()
     {
         return playField;

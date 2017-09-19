@@ -70,4 +70,13 @@ public class StartText extends DrawText
     {
         return visibility;
     }
+    
+    public void reset()
+    {
+        this.xPosition = 250;
+        this.yPosition = 350;
+        this.textYPosition = 0;
+        startSpeed = 1;
+        visibility = 255;
+    }
 }

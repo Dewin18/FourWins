@@ -11,5 +11,7 @@ public abstract class DrawText
     
     protected abstract void draw(Graphics g);
     
+    protected abstract void reset();
+    
     protected abstract int getTextVisibilityValue(); 
 }
