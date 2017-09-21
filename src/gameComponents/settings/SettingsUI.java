@@ -14,19 +14,13 @@ public class SettingsUI
     private JPanel settingPanel;
     private JPanel timerPanel;
 
-    private JButton settings; // setNames, restart.. 
+    private JButton settings; 
     private JButton exit;
 
     private BufferedImage settingsIcon;
     private BufferedImage exitIcon;
 
     private JLabel timerLabel;
-    private long nextSecondsRecording = 0;
-
-    private long elapsedTime = 0;
-
-    private long firstSecondsRecording;
-    private long seconds = 0;
     private StopWatch stopWatch;
 
     public SettingsUI()
@@ -89,12 +83,6 @@ public class SettingsUI
     {
         settings = new JButton();
         exit = new JButton();
-    }
-
-    private void removeButtonsBorders()
-    {
-        settings.setBorderPainted(false);
-        exit.setBorderPainted(false);
     }
 
     private void addIconToSettingButton()

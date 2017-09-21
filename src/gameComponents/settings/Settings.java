@@ -3,12 +3,9 @@ package gameComponents.settings;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 
-import gameComponents.ComponentObserver;
-
-public class Settings //TODO 
+public class Settings
 {
     private SettingsUI settingsUI;
     private SettingsDialog settingsDialog;

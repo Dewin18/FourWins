@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 import gameComponents.ComponentTool;
 import gameComponents.columnSelector.ColumnSelector;
 import gameComponents.playField.PlayFieldHandler;
-import gameComponents.scoreDisplay.ScoreDisplay;
 
 public class GamePanel extends JPanel implements Runnable
 {

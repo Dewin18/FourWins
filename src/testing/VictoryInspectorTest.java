@@ -7,9 +7,7 @@ import org.junit.Test;
 
 import gameComponents.playField.PlayField;
 import gameComponents.playField.PlayFieldHandler;
-import gameComponents.playField.PlayFieldImpl;
 import gameComponents.playField.VictoryInspector;
-import jdk.net.NetworkPermission;
 
 public class VictoryInspectorTest
 {

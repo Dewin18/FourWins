@@ -39,14 +39,6 @@ public class ColumnSelectorUI
         //removeButtonBorder();
     }
     
-    private void removeButtonBorder()
-    {
-        for (JButton button : buttons)
-        {
-            button.setBorderPainted(false);
-        }
-    }
-
     private void initButtonArray()
     {
         int numberOfButtons = 7;
