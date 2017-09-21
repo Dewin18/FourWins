@@ -80,8 +80,8 @@ public class SettingsDialog extends ObservableComponent
         namesChanged = false;
     }
 
-    public SettingsDialogUI getSettingsDialogUI()
+    public void showDialog()
     {
-        return settingsDialogUI;
+        settingsDialogUI.showDialog();
     }
 }

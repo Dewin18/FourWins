@@ -31,7 +31,7 @@ public class ComponentTool implements ComponentObserver
     private void createComponents()
     {
         playFieldHandler = new PlayFieldHandler();
-        columnSelector = new ColumnSelector(playFieldHandler);
+        columnSelector = new ColumnSelector();
         scoreDisplay = new ScoreDisplay();
         settingsDialog = new SettingsDialog();
         settings = new Settings(settingsDialog);

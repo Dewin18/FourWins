@@ -30,7 +30,7 @@ public class Settings
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    settingsDialog.getSettingsDialogUI().showDialog();
+                    settingsDialog.showDialog();
                 }
             });
 

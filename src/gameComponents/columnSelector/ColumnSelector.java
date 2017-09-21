@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import gameComponents.ObservableComponent;
-import gameComponents.playField.PlayFieldHandler;
 
 public class ColumnSelector extends ObservableComponent
 {
@@ -16,7 +15,7 @@ public class ColumnSelector extends ObservableComponent
     private int column;
     private boolean buttonPressed;
 
-    public ColumnSelector(PlayFieldHandler playField)
+    public ColumnSelector()
     {
         columnSelectorUI = new ColumnSelectorUI();
         
