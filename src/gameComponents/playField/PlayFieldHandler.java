@@ -61,9 +61,9 @@ public class PlayFieldHandler extends JPanel
 
     private boolean textIsVisible(DrawText drawText)
     {
-        int alpha = 20;
+        int alphaLowerLimit = 20;
         
-        return (drawText.getTextVisibilityValue() > alpha);
+        return (drawText.getAlpha() > alphaLowerLimit);
     }
 
     private void drawFullTextIfPlayfieldIsFull(Graphics g)

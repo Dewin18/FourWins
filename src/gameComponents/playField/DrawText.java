@@ -12,7 +12,7 @@ public class DrawText
     private int green;
     private int blue;
     private int startSpeed;
-    private int visibility;
+    private int alpha;
     private final int FONT_SIZE = 50;
     private int textYPosition;
     private Font font;
@@ -25,7 +25,7 @@ public class DrawText
         initRGBColorFromColor(color);
 
         startSpeed = 1;
-        visibility = 255;
+        alpha = 255;
         textYPosition = 0;
 
         initFont();
@@ -60,7 +60,7 @@ public class DrawText
 
             if (textIsNotInvisible())
             {
-                visibility -= 20;
+                alpha -= 20;
             }
         }
         yPosition -= startSpeed;
@@ -70,14 +70,14 @@ public class DrawText
     private void drawText(Graphics g)
     {
         g.setFont(font);
-        Color color = new Color(red, green, blue, visibility);
+        Color color = new Color(red, green, blue, alpha);
         g.setColor(color);
         g.drawString(text, xPosition, yPosition);
     }
 
     public boolean textIsNotInvisible()
     {
-        return (visibility > 21);
+        return (alpha > 21);
     }
 
     private boolean YThresholdReached()
@@ -90,9 +90,9 @@ public class DrawText
         startSpeed++;
     }
 
-    public int getTextVisibilityValue()
+    public int getAlpha()
     {
-        return visibility;
+        return alpha;
     }
 
     protected void resetValues()
@@ -101,6 +101,6 @@ public class DrawText
         yPosition = position.y;
         textYPosition = 0;
         startSpeed = 1;
-        visibility = 255;
+        alpha = 255;
     }
 }
