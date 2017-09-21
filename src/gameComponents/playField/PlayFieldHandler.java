@@ -19,13 +19,22 @@ public class PlayFieldHandler extends JPanel
     {
         playFieldScreen = new PlayFieldScreen();
         playField = (PlayField) new PlayFieldImpl();
+        initDrawText();
+    }
 
+    private void initDrawText()
+    {
         String start = "Player 1 Start!";
         String full = "Reset game board...";
 
-        startText = new DrawText(start, new Point(150, 350),
-                Color.GREEN.darker());
-        fullText = new DrawText(full, new Point(100, 350), Color.ORANGE);
+        Point startTextPosition = new Point(150, 350);
+        Point fullTextPosition = new Point(100, 350);
+
+        Color startTextColor = Color.GREEN.darker();
+        Color fullTextColor = Color.GREEN.darker();
+
+        startText = new DrawText(start, startTextPosition, startTextColor);
+        fullText = new DrawText(full, fullTextPosition, fullTextColor);
     }
 
     public void paintComponent(Graphics g)
@@ -46,8 +55,7 @@ public class PlayFieldHandler extends JPanel
     {
         if (textIsVisible(startText))
         {
-            //   startText.draw(g);
-            fullText.draw(g);
+            startText.draw(g);
         }
     }
 
