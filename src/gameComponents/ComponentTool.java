@@ -101,15 +101,9 @@ public class ComponentTool implements ComponentObserver
 
             new VictoryDialog(winnerName);
 
-            resetPlayField();
+            playFieldHandler.resetPlayField();
             playFieldHandler.resetVicotry();
         }
-    }
-
-    private void resetPlayField()
-    {
-        playFieldHandler.resetTokenList();
-        playFieldHandler.resetColumns();
     }
 
     private void increaseWinnerScore(int winner)

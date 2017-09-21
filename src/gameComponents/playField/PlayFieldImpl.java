@@ -2,9 +2,10 @@ package gameComponents.playField;
 
 public class PlayFieldImpl implements PlayField
 {
-    private VictoryInspector inspector;
+    private final boolean tracing = false;
     private final int columns = 7;
     private final int rows = 6;
+    private VictoryInspector inspector;
 
     private int[][] playField;
     private int currentPlayerNumber = 1;
@@ -15,9 +16,12 @@ public class PlayFieldImpl implements PlayField
     {
         playField = new int[rows][columns];
         inspector = new VictoryInspector(rows, columns);
-        
-        writeOnConsole(playField);
-        System.out.println();
+
+        if (tracing)
+        {
+            writeOnConsole(playField);
+            System.out.println();
+        }
     }
 
     public void placeTokenIfValidColumn(int column)
@@ -35,7 +39,8 @@ public class PlayFieldImpl implements PlayField
             changePlayer();
         }
         System.out.println();
-        writeOnConsole(playField);
+
+        if (tracing) writeOnConsole(playField);
     }
 
     public boolean isValidColumn(int column)
@@ -58,8 +63,8 @@ public class PlayFieldImpl implements PlayField
     private void checkForVictory()
     {
         victory = inspector.checkAllCases(playField);
-        
-        if(victory)
+
+        if (victory)
         {
             resetPlayField();
         }
@@ -82,14 +87,14 @@ public class PlayFieldImpl implements PlayField
 
     public boolean isPlayFieldFull()
     {
-       return isFull;
+        return isFull;
     }
-    
+
     public void disablePlayFieldIsFull()
     {
         isFull = false;
     }
-    
+
     private boolean checkIfPlayFieldIsFull()
     {
         for (int i = 0; i < columns; i++)
@@ -98,7 +103,7 @@ public class PlayFieldImpl implements PlayField
         }
         return true;
     }
-    
+
     public int[][] getField()
     {
         return playField;
@@ -115,17 +120,17 @@ public class PlayFieldImpl implements PlayField
             System.out.println();
         }
     }
-    
+
     public int getCurrentPlayer()
     {
         return currentPlayerNumber;
     }
-    
+
     public boolean isVicotry()
     {
         return victory;
     }
-    
+
     public void setVictoryFalse()
     {
         victory = false;

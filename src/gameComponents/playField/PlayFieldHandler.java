@@ -1,6 +1,8 @@
 package gameComponents.playField;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -17,8 +19,13 @@ public class PlayFieldHandler extends JPanel
     {
         playFieldScreen = new PlayFieldScreen();
         playField = (PlayField) new PlayFieldImpl();
-        startText = new StartText("Player 1 Start!", 150, 350);
-        fullText = new StartText("FULL!!!", 250, 350);
+
+        String start = "Player 1 Start!";
+        String full = "Reset game board...";
+
+        startText = new DrawText(start, new Point(150, 350),
+                Color.GREEN.darker());
+        fullText = new DrawText(full, new Point(100, 350), Color.ORANGE);
     }
 
     public void paintComponent(Graphics g)
@@ -26,34 +33,50 @@ public class PlayFieldHandler extends JPanel
         super.paintComponent(g);
 
         drawPlayFieldScreen(g);
-
-        if (startTextIsVisible())
-        {
-            startText.draw(g);
-        }
-
-        if (playField.isPlayFieldFull()) // TODO refactoring
-        {
-            fullText.draw(g);
-
-            if(fullText.getTextVisibilityValue() < 20)
-            {
-                resetColumns();
-                resetTokenList();
-                playField.disablePlayFieldIsFull();
-                fullText.reset();
-            }
-        }
-    }
-
-    private boolean startTextIsVisible()
-    {
-        return (startText.getTextVisibilityValue() > 20);
+        drawStartTextIfVisible(g);
+        drawFullTextIfPlayfieldIsFull(g);
     }
 
     private void drawPlayFieldScreen(Graphics g)
     {
         playFieldScreen.draw(g);
+    }
+
+    private void drawStartTextIfVisible(Graphics g)
+    {
+        if (textIsVisible(startText))
+        {
+            //   startText.draw(g);
+            fullText.draw(g);
+        }
+    }
+
+    private boolean textIsVisible(DrawText drawText)
+    {
+        return (drawText.getTextVisibilityValue() > 20);
+    }
+
+    private void drawFullTextIfPlayfieldIsFull(Graphics g)
+    {
+        if (playField.isPlayFieldFull())
+        {
+            if (textIsVisible(fullText))
+            {
+                fullText.draw(g);
+            }
+            else
+            {
+                resetPlayField();
+                playField.disablePlayFieldIsFull();
+                fullText.resetValues();
+            }
+        }
+    }
+
+    public void resetPlayField()
+    {
+        resetColumns();
+        resetTokenList();
     }
 
     public void placeToken(int position)
@@ -80,9 +103,12 @@ public class PlayFieldHandler extends JPanel
 
         switch (winner)
         {
-        case 1:  return 2;
-        case 2:  return 1;
-        default: return 0;
+        case 1:
+            return 2;
+        case 2:
+            return 1;
+        default:
+            return 0;
         }
     }
 
