@@ -62,7 +62,7 @@ public class PlayFieldHandler extends JPanel
     private boolean textIsVisible(DrawText drawText)
     {
         int alphaLowerLimit = 20;
-        
+
         return (drawText.getAlpha() > alphaLowerLimit);
     }
 
@@ -87,6 +87,18 @@ public class PlayFieldHandler extends JPanel
     {
         resetColumns();
         resetTokenList();
+    }
+
+    public void resetTokenList()
+    {
+        playFieldScreen.getTokens()
+            .clear();
+    }
+
+    private void resetColumns()
+    {
+        playFieldScreen.initColumns();
+        playFieldScreen.initColumnMap();
     }
 
     public void placeToken(int position)
@@ -137,21 +149,9 @@ public class PlayFieldHandler extends JPanel
         return playField.isVicotry();
     }
 
-    public void resetTokenList()
-    {
-        playFieldScreen.getTokens()
-            .clear();
-    }
-
     public ArrayList<Token> getTokens()
     {
         return playFieldScreen.getTokens();
-    }
-
-    public void resetColumns()
-    {
-        playFieldScreen.initColumns();
-        playFieldScreen.initColumnMap();
     }
 
     public void resetVicotry()
