@@ -22,11 +22,8 @@ public class VictoryDialogUI
     public VictoryDialogUI()
     {
     	initNameAndIconPanel();
-    	
- 
         initVictoryDialog();
         initButtonPanel();
-      
         insertPanelsIntoJDialog();
     }
 
@@ -37,7 +34,7 @@ public class VictoryDialogUI
     	
         loadCrownicon();
         initCrownLabel();
-        initWinnerLabel();
+        initWinnerNameLabel();
         
         nameAndIconPanel.add(crownLabel);
         nameAndIconPanel.add(winnerName);
@@ -62,7 +59,7 @@ public class VictoryDialogUI
         crownLabel.setIcon(new ImageIcon(crownImage));
     }
 	
-    private void initWinnerLabel()
+    private void initWinnerNameLabel()
     {
         winnerName = new JLabel();
     }
@@ -79,7 +76,6 @@ public class VictoryDialogUI
     {
         victoryDialog = new JDialog();
         victoryDialog.setLayout(new BorderLayout());
-       // victoryDialog.setPreferredSize(new Dimension(200, 110));
     }
 
     private void initButtons()

@@ -34,12 +34,12 @@ public class ColumnSelectorUI
     {
         createColumnButtons();
         initButtonArray();
-        setButtonIcon("▾");
+        setButtonIcon("\u25BC");
         setButtonSize();
         //removeButtonBorder();
     }
     
-    private void initButtonArray()
+	private void initButtonArray()
     {
         int numberOfButtons = 7;
         buttons = new JButton[numberOfButtons];
