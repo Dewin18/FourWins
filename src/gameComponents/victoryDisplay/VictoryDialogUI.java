@@ -15,23 +15,34 @@ public class VictoryDialogUI
     private BufferedImage crownImage;
     private JLabel crownLabel;
     private JLabel winnerName;
+    
+    private JPanel nameAndIconPanel;
+    private JPanel buttonPanel;
 
     public VictoryDialogUI()
     {
+    	initNameAndIconPanel();
+    	
+ 
+        initVictoryDialog();
+        initButtonPanel();
+      
+        insertPanelsIntoJDialog();
+    }
+
+    private void initNameAndIconPanel()
+    {
+    	nameAndIconPanel = new JPanel();
+    	nameAndIconPanel.setLayout(new FlowLayout());
+    	
         loadCrownicon();
         initCrownLabel();
         initWinnerLabel();
-        initVictoryDialog();
-        initButtons();
-        insertButtonsIntoDialog();
-    }
-
-    private void initCrownLabel()
-    {
-        crownLabel = new JLabel();
-        crownLabel.setIcon(new ImageIcon(crownImage));
-    }
-
+        
+        nameAndIconPanel.add(crownLabel);
+        nameAndIconPanel.add(winnerName);
+	}
+    
     private void loadCrownicon()
     {
         try
@@ -44,31 +55,46 @@ public class VictoryDialogUI
             e.printStackTrace();
         }
     }
-
+    
+	private void initCrownLabel()
+    {
+        crownLabel = new JLabel();
+        crownLabel.setIcon(new ImageIcon(crownImage));
+    }
+	
     private void initWinnerLabel()
     {
         winnerName = new JLabel();
     }
 
+	private void initButtonPanel() 
+    {
+    	buttonPanel = new JPanel();	
+    	buttonPanel.setLayout(new FlowLayout());
+    	
+    	initButtons();
+	}
+
     private void initVictoryDialog()
     {
         victoryDialog = new JDialog();
-        victoryDialog.setLayout(new FlowLayout());
-        victoryDialog.setPreferredSize(new Dimension(200, 110));
+        victoryDialog.setLayout(new BorderLayout());
+       // victoryDialog.setPreferredSize(new Dimension(200, 110));
     }
 
     private void initButtons()
     {
         revanche = new JButton("Revanche");
         exit = new JButton("Exit");
+
+        buttonPanel.add(revanche);
+        buttonPanel.add(exit);
     }
 
-    private void insertButtonsIntoDialog()
+    private void insertPanelsIntoJDialog()
     {
-        victoryDialog.add(crownLabel);
-        victoryDialog.add(winnerName);
-        victoryDialog.add(revanche);
-        victoryDialog.add(exit);
+        victoryDialog.add(nameAndIconPanel, BorderLayout.NORTH);
+        victoryDialog.add(buttonPanel, BorderLayout.SOUTH);
     }
 
     public void showDialog()
