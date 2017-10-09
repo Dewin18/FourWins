@@ -38,9 +38,12 @@ public class PlayFieldImpl implements PlayField
             }
             changePlayer();
         }
-        System.out.println();
 
-        if (tracing) writeOnConsole(playField);
+        if (tracing)
+        {
+            writeOnConsole(playField);
+            System.out.println();
+        }
     }
 
     public boolean isValidColumn(int column)
