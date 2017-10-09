@@ -129,7 +129,7 @@ public class PlayFieldImpl implements PlayField
         return currentPlayerNumber;
     }
 
-    public boolean isVicotry()
+    public boolean isVictory()
     {
         return victory;
     }

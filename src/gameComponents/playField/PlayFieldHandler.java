@@ -146,7 +146,7 @@ public class PlayFieldHandler extends JPanel
 
     public boolean isVictory()
     {
-        return playField.isVicotry();
+        return playField.isVictory();
     }
 
     public ArrayList<Token> getTokens()

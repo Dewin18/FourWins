@@ -2,21 +2,21 @@ package gameComponents.playField;
 
 public interface PlayField
 {
-    public void placeTokenIfValidColumn(int column);
+    void placeTokenIfValidColumn(int column);
     
-    public boolean isValidColumn(int column);
+    boolean isValidColumn(int column);
+
+    boolean isPlayFieldFull();
+
+    int[][] getField();
     
-    public boolean isPlayFieldFull();
+    int getCurrentPlayer();
     
-    public int[][] getField();
+    boolean isVictory();
     
-    public int getCurrentPlayer();
+    void writeOnConsole(int[][] playField);
     
-    public boolean isVicotry();
+    void setVictoryFalse();
     
-    public void writeOnConsole(int[][] playField);
-    
-    public void setVictoryFalse();
-    
-    public void disablePlayFieldIsFull();
+    void disablePlayFieldIsFull();
 }
